@@ -47,7 +47,7 @@ class OrdersView extends StatelessWidget {
         final order = state.orders[index];
         return ArtefactPreview(
           order: order,
-          action: () => state.doAction(order),
+          action: () => state.doAction(context, order),
         );
       },
       separatorBuilder: (_, __) => const Divider(color: Colors.black),

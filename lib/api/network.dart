@@ -7,6 +7,7 @@ class Network {
     await Future.delayed(const Duration(seconds: 1));
     return Orders(orders: [
       Order(
+        id: Identifier.fromString('1'),
         artefact: Artefact(
           name: "Медуза",
           url: "assets/artefacts/meduza.jpg",
@@ -15,6 +16,7 @@ class Network {
         price: 15000,
       ),
       Order(
+        id: Identifier.fromString('2'),
         artefact: Artefact(
           name: "Ломоть мяса",
           url: "assets/artefacts/lomot.jpg",
