@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:mpi_front/stores/app_state.dart';
 import 'package:mpi_front/stores/orders.dart';
 import 'package:mpi_front/widgets/artefact_preview.dart';
 import 'package:provider/provider.dart';
 
 class OrdersPage extends StatelessWidget {
   final String title = "Заказы";
+  final OrdersType type;
 
-  const OrdersPage({Key? key}) : super(key: key);
+  const OrdersPage({
+    Key? key,
+    required this.type,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => OrdersState(),
+      create: (context) => OrdersState(
+        app: context.read<AppState>(),
+        type: type,
+      ),
       child: Scaffold(
         appBar: AppBar(
           title: Text(title),
@@ -37,7 +45,10 @@ class OrdersView extends StatelessWidget {
       itemCount: state.orders.length,
       itemBuilder: (context, index) {
         final order = state.orders[index];
-        return ArtefactPreview(order: order);
+        return ArtefactPreview(
+          order: order,
+          action: () => state.doAction(order),
+        );
       },
       separatorBuilder: (_, __) => const Divider(color: Colors.black),
     );
