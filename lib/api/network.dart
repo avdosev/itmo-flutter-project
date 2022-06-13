@@ -1,7 +1,10 @@
 import 'package:mpi_front/models/models.dart';
+import 'package:http/http.dart' as http;
 
 class Network {
   static Network get I => Network();
+
+  final api = 'localhost:5000/api';
 
   Future<Orders> getOrders() async {
     await Future.delayed(const Duration(seconds: 1));
