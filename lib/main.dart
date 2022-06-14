@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mpi_front/api/auth_service.dart';
+import 'package:mpi_front/pages/create_order.dart';
 import 'package:mpi_front/pages/pages.dart';
 import 'package:mpi_front/stores/app_state.dart';
 import 'package:provider/provider.dart';
@@ -32,16 +33,21 @@ class MyApp extends StatelessWidget {
           path: '/auth/register',
           builder: (context, state) => const Register(),
         ),
+        GoRoute(
+          path: '/order/create',
+          builder: (context, state) => const CreateOrder(),
+        ),
       ],
-      redirect: (state) {
-        final loggedIn = AuthService.I.isLogged;
-        final loggingIn = state.location.startsWith('/auth');
+      // TODO: вернуть
+      // redirect: (state) {
+      //   final loggedIn = AuthService.I.isLogged;
+      //   final loggingIn = state.location.startsWith('/auth');
 
-        if (!loggedIn) return loggingIn ? null : '/auth/not_authed';
+      //   if (!loggedIn) return loggingIn ? null : '/auth/not_authed';
 
-        // no need to redirect at all
-        return null;
-      },
+      //   // no need to redirect at all
+      //   return null;
+      // },
       refreshListenable: AuthService.I,
     );
 

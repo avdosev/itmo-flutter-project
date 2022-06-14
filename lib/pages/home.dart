@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mpi_front/pages/orders.dart';
 import 'package:mpi_front/stores/app_state.dart';
 import 'package:mpi_front/utils/navigation.dart';
@@ -38,6 +39,11 @@ class Home extends StatelessWidget {
               title: Text('Информация'),
               onTap: () =>
                   context.to(() => OrdersPage(type: OrdersType.inform)),
+            ),
+          if (app.activeUserType.isClient)
+            ListTile(
+              title: Text('Создать заказ'),
+              onTap: () => context.push('/order/create'),
             ),
         ],
       ),

@@ -19,6 +19,7 @@ enum UserType {
   bool get isUnknown => this == UserType.unknown;
   bool get isStalker => true;
   bool get isInformer => true;
+  bool get isClient => true;
 
   static List<UserType> get list => values.where((e) => !e.isUnknown).toList();
 }
