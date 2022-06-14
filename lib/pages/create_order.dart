@@ -80,7 +80,7 @@ class CreateOrder extends HookWidget {
                     FormBuilderDateTimePicker(
                       name: 'deadline',
                       decoration: const InputDecoration(
-                        labelText: 'password',
+                        labelText: 'Выполнить до',
                       ),
                       // valueTransformer: (text) => num.tryParse(text),
                       validator: (DateTime? dateTime) {
