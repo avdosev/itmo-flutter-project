@@ -29,6 +29,14 @@ enum UserType {
     }
   }
 
+  int get id => const {
+        UserType.client: 2,
+        UserType.baruga: 1,
+        UserType.stalker: 3,
+        UserType.informer: 4,
+        UserType.unknown: 5,
+      }[this]!;
+
   // TODO: fix
   // bool get isBaruga => this == UserType.baruga;
   // bool get isUnknown => this == UserType.unknown;

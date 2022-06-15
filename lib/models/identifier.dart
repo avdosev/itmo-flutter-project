@@ -8,4 +8,7 @@ class Identifier {
   }
 
   dynamic toJson() => int.parse(value);
+
+  @override
+  String toString() => value;
 }
