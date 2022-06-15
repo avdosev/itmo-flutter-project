@@ -2,25 +2,29 @@ import 'package:flutter/material.dart';
 
 import 'package:mpi_front/models/models.dart';
 
-class ArtefactPreview extends StatelessWidget {
-  const ArtefactPreview({
+class ArtifactPreview extends StatelessWidget {
+  const ArtifactPreview({
     Key? key,
-    required this.order,
+    required this.artifact,
+    this.order,
     this.action,
   }) : super(key: key);
 
-  final Order order;
+  final Artifact artifact;
+  final Order? order;
   final VoidCallback? action;
 
   @override
   Widget build(BuildContext context) {
+    final price = order?.order.price ?? artifact.price;
+    final datelimit = order?.order.completionDate;
     return ListTile(
       onTap: action,
-      leading: Image.asset(order.artefact.url),
-      title: Text(order.artefact.name),
+      leading: artifact.url == null ? null : Image.asset(artifact.url!),
+      title: Text(artifact.name),
       subtitle: Text([
-        if (order.price != null) 'Цена ${order.price}',
-        if (order.datelimit != null) 'До ${formatDateTime(order.datelimit!)}',
+        if (price != null) 'Цена $price',
+        if (datelimit != null) 'До $datelimit',
       ].join('   ')),
       trailing: action == null ? null : const Icon(Icons.chevron_right),
     );

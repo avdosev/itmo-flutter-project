@@ -3,7 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mpi_front/models/artefact.dart';
+import 'package:mpi_front/models/artifact.dart';
 import 'package:mpi_front/pages/components/select_order_template.dart';
 
 final _formKey = GlobalKey<FormBuilderState>();
@@ -100,8 +100,7 @@ class CreateOrder extends HookWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () async {
-                final template =
-                    await Navigator.of(context).push<ArtefactTemplate>(
+                final template = await Navigator.of(context).push<Artifact>(
                   MaterialPageRoute(
                     builder: (context) => TemplateOrderSelector(),
                   ),
@@ -111,7 +110,7 @@ class CreateOrder extends HookWidget {
                   'name': template.name,
                   'price': template.price.toString(),
                 });
-                icon.value = template.artefact.url;
+                icon.value = template.url;
               },
               child: const Text('Выбрать шаблон'),
             ),

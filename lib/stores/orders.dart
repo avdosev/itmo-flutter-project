@@ -27,13 +27,13 @@ class OrdersState extends ChangeNotifier {
 
   void load() async {
     isLoading = true;
-    final result = await Network.I.getOrders();
+    // final result = await Network.I.getOrders();
     isLoading = false;
-    orders.addAll(result.orders);
+    // orders.addAll(result.orders);
     notifyListeners();
   }
 
   void doAction(BuildContext context, Order order) {
-    context.to(() => OrderPage(orderId: order.id));
+    // context.to(() => OrderPage(orderId: order.id));
   }
 }

@@ -1,14 +1,33 @@
+import 'package:json_annotation/json_annotation.dart';
+
+@JsonEnum()
 enum UserType {
-  client(0, 'клиент'),
-  baruga(1, 'барыга'),
-  stalker(2, 'сталкер'),
-  informer(3, 'информатор'),
-  unknown(4, 'хуйня какая-то');
+  @JsonValue(2)
+  client,
+  @JsonValue(1)
+  baruga,
+  @JsonValue(3)
+  stalker,
+  @JsonValue(4)
+  informer,
+  @JsonValue(5)
+  unknown;
 
-  final int roleId;
-  final String runame;
-
-  const UserType(this.roleId, this.runame);
+  String get runame {
+    switch (this) {
+      case client:
+        return 'клиент';
+      case baruga:
+        return 'барыга';
+      case stalker:
+        return 'сталкер';
+      case informer:
+        return 'информатор';
+      case unknown:
+      default:
+        return 'хуйня какая-то';
+    }
+  }
 
   // TODO: fix
   // bool get isBaruga => this == UserType.baruga;

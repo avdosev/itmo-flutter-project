@@ -39,15 +39,15 @@ class MyApp extends StatelessWidget {
         ),
       ],
       // TODO: вернуть
-      // redirect: (state) {
-      //   final loggedIn = AuthService.I.isLogged;
-      //   final loggingIn = state.location.startsWith('/auth');
+      redirect: (state) {
+        final loggedIn = AuthService.I.isLogged;
+        final loggingIn = state.location.startsWith('/auth');
 
-      //   if (!loggedIn) return loggingIn ? null : '/auth/not_authed';
+        if (!loggedIn) return loggingIn ? null : '/auth/not_authed';
 
-      //   // no need to redirect at all
-      //   return null;
-      // },
+        // no need to redirect at all
+        return null;
+      },
       refreshListenable: AuthService.I,
     );
 

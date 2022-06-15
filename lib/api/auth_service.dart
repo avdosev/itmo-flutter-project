@@ -11,9 +11,13 @@ class AuthService extends ChangeNotifier {
 
   bool get isLogged => token != null;
 
-  void register() async {}
+  void authorize(String token) {
+    this.token = token;
+    notifyListeners();
+  }
 
-  void login() async {}
-
-  void logout() async {}
+  void logout() {
+    token = null;
+    notifyListeners();
+  }
 }

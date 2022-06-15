@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mpi_front/stores/app_state.dart';
 import 'package:mpi_front/stores/orders.dart';
-import 'package:mpi_front/widgets/artefact_preview.dart';
+import 'package:mpi_front/widgets/artifact_preview.dart';
 import 'package:provider/provider.dart';
 
 class OrdersPage extends StatelessWidget {
@@ -45,8 +45,9 @@ class OrdersView extends StatelessWidget {
       itemCount: state.orders.length,
       itemBuilder: (context, index) {
         final order = state.orders[index];
-        return ArtefactPreview(
+        return ArtifactPreview(
           order: order,
+          artifact: order.artifact,
           action: () => state.doAction(context, order),
         );
       },
