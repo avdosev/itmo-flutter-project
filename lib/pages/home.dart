@@ -5,8 +5,6 @@ import 'package:mpi_front/stores/app_state.dart';
 import 'package:mpi_front/utils/navigation.dart';
 import 'package:provider/provider.dart';
 
-import '../stores/orders.dart';
-
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -17,34 +15,29 @@ class Home extends StatelessWidget {
       appBar: AppBar(title: const Text("Меню")),
       body: ListView(
         children: [
-          if (app.activeUserType.isBaruga)
+          ListTile(
+            title: Text('Заказы'),
+            onTap: () => context.push('/orders/'),
+          ),
+          if (app.activeUserType.isBaruga || app.activeUserType.isStalker)
             ListTile(
-              title: Text('Заказы, непринятые'),
-              onTap: () =>
-                  context.to(() => OrdersPage(type: OrdersType.notAccepted)),
-            ),
-          if (app.activeUserType.isBaruga)
-            ListTile(
-              title: Text('Заказы, принятые'),
-              onTap: () =>
-                  context.to(() => OrdersPage(type: OrdersType.inProgress)),
-            ),
-          if (app.activeUserType.isStalker)
-            ListTile(
-              title: Text('Заказы'),
-              onTap: () => context.to(() => OrdersPage(type: OrdersType.all)),
+              title: Text('Заказы, доступные'),
+              onTap: () => null,
             ),
           if (app.activeUserType.isStalker)
             ListTile(
               title: Text('Информация'),
-              onTap: () =>
-                  context.to(() => OrdersPage(type: OrdersType.inform)),
+              onTap: () => null,
             ),
           if (app.activeUserType.isClient)
             ListTile(
               title: Text('Создать заказ'),
               onTap: () => context.push('/order/create'),
             ),
+          ListTile(
+            title: Text('Выйти'),
+            onTap: () => app.logout(),
+          ),
         ],
       ),
     );

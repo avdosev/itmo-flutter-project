@@ -37,15 +37,10 @@ enum UserType {
         UserType.unknown: 5,
       }[this]!;
 
-  // TODO: fix
-  // bool get isBaruga => this == UserType.baruga;
-  // bool get isUnknown => this == UserType.unknown;
-  // bool get isStalker => this == UserType.stalker;
-  // bool get isInformer => this == UserType.informer;
-  bool get isBaruga => true;
+  bool get isBaruga => this == UserType.baruga;
   bool get isUnknown => this == UserType.unknown;
-  bool get isStalker => true;
-  bool get isInformer => true;
+  bool get isStalker => this == UserType.stalker;
+  bool get isInformer => this == UserType.informer;
   bool get isClient => true;
 
   static List<UserType> get list => values.where((e) => !e.isUnknown).toList();

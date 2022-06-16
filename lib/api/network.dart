@@ -11,10 +11,20 @@ class Network {
   final api = 'http://127.0.0.1:8080/api';
 
   Future<dynamic> get(String url) async {
+    print(AuthService.I.token);
     final resp = await http.get(Uri.parse(url), headers: {
-      if (AuthService.I.token != null) 'Authorization': AuthService.I.token!,
+      if (AuthService.I.token != null)
+        'Authorization': 'Bearer ${AuthService.I.token!}',
+      'Content-Type': 'application/json',
     });
-    final json = jsonDecode(resp.body);
+    final body = Utf8Decoder().convert(resp.bodyBytes);
+    print('--request--');
+    print(url);
+    print(resp.statusCode);
+    print(resp.headers);
+    print(body);
+    print('--request--');
+    final json = jsonDecode(body);
     return json;
   }
 
@@ -22,11 +32,16 @@ class Network {
     final resp = await http.post(
       Uri.parse(url),
       headers: {
-        if (AuthService.I.token != null) 'Authorization': AuthService.I.token!,
+        'Content-Type': 'application/json',
+        if (AuthService.I.token != null)
+          'Authorization': 'Bearer ${AuthService.I.token!}',
       },
       body: json == null ? null : jsonEncode(json),
     );
-    final resJson = jsonDecode(resp.body);
+    final body = Utf8Decoder().convert(resp.bodyBytes);
+    print(url);
+    print(body);
+    final resJson = jsonDecode(body);
     return resJson;
   }
 
@@ -35,14 +50,21 @@ class Network {
     required String password,
     required UserType role,
   }) {
-    return get('$api/auth/register').map.then(AuthState.fromJson);
+    return post('$api/auth/register', {
+      'email': email,
+      'password': password,
+      'roleId': role.id,
+    }).map.then(AuthState.fromJson);
   }
 
   Future<AuthState> login({
     required String email,
     required String password,
   }) {
-    return get('$api/auth/login').map.then(AuthState.fromJson);
+    return post('$api/auth/login', {
+      'email': email,
+      'password': password,
+    }).map.then(AuthState.fromJson);
   }
 
   Future<List<Artifact>> templates() {

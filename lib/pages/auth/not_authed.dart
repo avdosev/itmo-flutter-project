@@ -13,8 +13,12 @@ class NotAuthed extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Вы не\nавторизованы\n:(',
-              style: Theme.of(context).textTheme.displaySmall,
+              'Вы не\nавторизованы\n🙁',
+              style: Theme.of(context)
+                  .textTheme
+                  .displaySmall!
+                  .copyWith(color: Colors.grey),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40),
             ElevatedButton(
