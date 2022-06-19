@@ -11,4 +11,12 @@ class Identifier {
 
   @override
   String toString() => value;
+
+  @override
+  bool operator ==(Object obj) {
+    return obj is Identifier && value == obj.value;
+  }
+
+  @override
+  int get hashCode => value.hashCode;
 }

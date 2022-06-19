@@ -122,7 +122,9 @@ class Network {
   }
 
   Future<List<User>> stalkers() {
-    return get('$api/orders').list.then((e) => e.mapList(User.fromJson));
+    return get('$api/users/stalkers')
+        .list
+        .then((e) => e.mapList(User.fromJson));
   }
 }
 

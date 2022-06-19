@@ -34,7 +34,7 @@ class OrdersPage extends HookWidget {
                 return ArtifactPreview(
                   order: order,
                   artifact: order.artifact,
-                  action: () => context.push('/order/${order.order.id}'),
+                  action: () => context.push('/order/${order.info.id}'),
                 );
               },
               separatorBuilder: (_, __) => const Divider(color: Colors.black),

@@ -15,12 +15,12 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
           ? null
           : User.fromJson(json['assignedUser'] as Map<String, dynamic>),
       createdUser: User.fromJson(json['createdUser'] as Map<String, dynamic>),
-      order: OrderInfo.fromJson(json['order'] as Map<String, dynamic>),
+      info: OrderInfo.fromJson(json['order'] as Map<String, dynamic>),
       status: OrderStatus.fromJson(json['orderStatus'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
-      'order': instance.order,
+      'order': instance.info,
       'createdUser': instance.createdUser,
       'acceptedUser': instance.acceptedUser,
       'assignedUser': instance.assignedUser,

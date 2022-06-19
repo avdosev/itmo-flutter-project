@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mpi_front/api/network.dart';
 import 'package:mpi_front/models/models.dart';
+import 'package:mpi_front/utils/buit.dart';
 import 'package:mpi_front/widgets/loader.dart';
+
+import 'components/order_actions.dart';
 
 class OrderPage extends HookWidget {
   final Identifier orderId;
@@ -11,7 +14,8 @@ class OrderPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final asyncArtifacts = useMemoized(() => Network.I.order(orderId));
+    final version = useState(0);
+    final asyncArtifacts = useMemoized(() => Network.I.order(orderId), [version.value]);
     final snapshot = useFuture(asyncArtifacts);
     if (!snapshot.hasData) {
       return const Loader();
@@ -27,7 +31,7 @@ class OrderPage extends HookWidget {
             Text('Сталкер: ${order.assignedUser == null ? 'не' : ''} назначен'),
             Text('Барыга: ${order.acceptedUser == null ? 'не' : ''} назначен'),
             // Text('Куда: ${order.order.price}'),
-            Text('Выполнить до: ${order.order.completionDate}'),
+            Text('Выполнить до: ${order.info.completionDate}'),
             Text('Статус: ${order.status.name}'),
           ].separated(
             const Divider(
@@ -36,40 +40,9 @@ class OrderPage extends HookWidget {
             ),
           ),
           const SizedBox(height: 40),
-          OrderActions(order: order),
+          OrderActions(order: order, onUpdate: () => version.value += 1),
         ],
       ),
-    );
-  }
-}
-
-extension _SeparatedList<T> on List<T> {
-  List<T> separated(T separator) {
-    final res = <T>[];
-    if (isNotEmpty) {
-      res.add(first);
-    }
-    for (var i = 1; i < length; i++) {
-      res.add(separator);
-      res.add(this[i]);
-    }
-    return res;
-  }
-}
-
-class OrderActions extends StatelessWidget {
-  final Order order;
-
-  const OrderActions({
-    super.key,
-    required this.order,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [],
     );
   }
 }

@@ -7,7 +7,8 @@ part 'orders.g.dart';
 
 @JsonSerializable()
 class Order {
-  final OrderInfo order;
+  @JsonKey(name: 'order')
+  final OrderInfo info;
   final User createdUser;
   final User? acceptedUser;
   final User? assignedUser;
@@ -20,12 +21,14 @@ class Order {
     required this.acceptedUser,
     required this.assignedUser,
     required this.createdUser,
-    required this.order,
+    required this.info,
     required this.status,
   });
 
   static Order fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
   Map<String, dynamic> toJson() => _$OrderToJson(this);
+
+  Identifier get id => info.id;
 }
 
 @JsonSerializable()

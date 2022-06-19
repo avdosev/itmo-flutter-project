@@ -6,7 +6,7 @@ part 'user.g.dart';
 
 @JsonSerializable()
 class User {
-  // final String url;
+  final String? url;
   final Identifier id;
   final String? firstName;
   final String? lastName;
@@ -15,7 +15,7 @@ class User {
   final UserType role;
 
   User({
-    // required this.url,
+    this.url,
     required this.id,
     required this.role,
     required this.firstName,

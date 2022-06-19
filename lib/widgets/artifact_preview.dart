@@ -16,8 +16,8 @@ class ArtifactPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final price = order?.order.price ?? artifact.price;
-    final datelimit = order?.order.completionDate;
+    final price = order?.info.price ?? artifact.price;
+    final datelimit = order?.info.completionDate;
     return ListTile(
       onTap: action,
       leading: artifact.url == null ? null : Image.asset(artifact.url!),
