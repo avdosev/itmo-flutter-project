@@ -30,8 +30,8 @@ Map<String, dynamic> _$RoleToJson(Role instance) => <String, dynamic>{
 
 const _$UserTypeEnumMap = {
   UserType.client: 2,
-  UserType.baruga: 1,
-  UserType.stalker: 3,
+  UserType.baruga: 3,
+  UserType.stalker: 1,
   UserType.informer: 4,
   UserType.unknown: 5,
 };

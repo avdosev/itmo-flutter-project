@@ -4,9 +4,9 @@ import 'package:json_annotation/json_annotation.dart';
 enum UserType {
   @JsonValue(2)
   client,
-  @JsonValue(1)
-  baruga,
   @JsonValue(3)
+  baruga,
+  @JsonValue(1)
   stalker,
   @JsonValue(4)
   informer,
@@ -31,8 +31,8 @@ enum UserType {
 
   int get id => const {
         UserType.client: 2,
-        UserType.baruga: 1,
-        UserType.stalker: 3,
+        UserType.baruga: 3,
+        UserType.stalker: 1,
         UserType.informer: 4,
         UserType.unknown: 5,
       }[this]!;
@@ -41,7 +41,7 @@ enum UserType {
   bool get isUnknown => this == UserType.unknown;
   bool get isStalker => this == UserType.stalker;
   bool get isInformer => this == UserType.informer;
-  bool get isClient => true;
+  bool get isClient => this == UserType.client;
 
   static List<UserType> get list => values.where((e) => !e.isUnknown).toList();
 }

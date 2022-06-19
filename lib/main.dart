@@ -39,6 +39,10 @@ final router = GoRouter(
       builder: (context, state) => const OrdersPage(),
     ),
     GoRoute(
+      path: '/orders/available',
+      builder: (context, state) => const OrdersAvailablePage(),
+    ),
+    GoRoute(
       path: '/order/:order_id',
       builder: (context, state) => OrderPage(
         orderId: Identifier.fromString(state.params['order_id']!),

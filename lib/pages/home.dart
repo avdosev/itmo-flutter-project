@@ -22,7 +22,7 @@ class Home extends StatelessWidget {
           if (app.activeUserType.isBaruga || app.activeUserType.isStalker)
             ListTile(
               title: Text('Заказы, доступные'),
-              onTap: () => null,
+              onTap: () => context.push('/orders/available'),
             ),
           if (app.activeUserType.isStalker)
             ListTile(
