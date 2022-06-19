@@ -12,8 +12,8 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final app = context.watch<AppState>();
     return Scaffold(
-      appBar: AppBar(title: const Text("Меню")),
-      body: ListView(
+      appBar: AppBar(title: Text("Меню, ${app.activeUserType.runame}")),
+      body: Column(
         children: [
           ListTile(
             title: Text('Заказы'),
@@ -34,7 +34,9 @@ class Home extends StatelessWidget {
               title: Text('Создать заказ'),
               onTap: () => context.push('/order/create'),
             ),
+          const Spacer(),
           ListTile(
+            leading: Icon(Icons.exit_to_app),
             title: Text('Выйти'),
             onTap: () => app.logout(),
           ),

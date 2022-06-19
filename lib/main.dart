@@ -39,7 +39,7 @@ final router = GoRouter(
       builder: (context, state) => const OrdersPage(),
     ),
     GoRoute(
-      path: '/orders/:order_id',
+      path: '/order/:order_id',
       builder: (context, state) => OrderPage(
         orderId: Identifier.fromString(state.params['order_id']!),
       ),
@@ -71,6 +71,21 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           appBarTheme: const AppBarTheme(
             color: Colors.black,
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.black,
+              padding: EdgeInsets.all(16),
+            ),
+          ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+              primary: Colors.black,
+              padding: EdgeInsets.all(16),
+            ),
+          ),
+          listTileTheme: ListTileThemeData(
+            iconColor: Colors.black,
           ),
         ),
         routeInformationParser: router.routeInformationParser,

@@ -24,13 +24,13 @@ class NotAuthed extends StatelessWidget {
             ElevatedButton(
               onPressed: () => context.push('/auth/login'),
               child: Text('Войти'),
-              style: ElevatedButton.styleFrom(fixedSize: const Size(150, 30)),
+              style: ElevatedButton.styleFrom(minimumSize: const Size(150, 30)),
             ),
             const SizedBox(height: 20),
             OutlinedButton(
               onPressed: () => context.push('/auth/register'),
               child: Text('Регистрация'),
-              style: OutlinedButton.styleFrom(fixedSize: const Size(150, 30)),
+              style: OutlinedButton.styleFrom(minimumSize: const Size(150, 30)),
             ),
           ],
         ),

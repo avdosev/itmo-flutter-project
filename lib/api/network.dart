@@ -29,6 +29,7 @@ class Network {
   }
 
   Future<dynamic> post(String url, [Map<String, dynamic>? json]) async {
+    print(AuthService.I.token);
     final resp = await http.post(
       Uri.parse(url),
       headers: {
@@ -39,8 +40,13 @@ class Network {
       body: json == null ? null : jsonEncode(json),
     );
     final body = Utf8Decoder().convert(resp.bodyBytes);
+    print('--request--');
     print(url);
+    print(resp.statusCode);
+    print(resp.headers);
+    print(jsonEncode(json));
     print(body);
+    print('--request--');
     final resJson = jsonDecode(body);
     return resJson;
   }
@@ -128,5 +134,5 @@ extension _Future on Future {
 }
 
 String dateTimeToJson(DateTime dt) {
-  return '${dt.year}-${dt.month}-${dt.day}';
+  return '${dt.year}-${dt.month.toString().padLeft(2, '0')}-${dt.day.toString().padLeft(2, '0')}';
 }

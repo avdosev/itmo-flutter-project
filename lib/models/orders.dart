@@ -11,6 +11,7 @@ class Order {
   final User createdUser;
   final User? acceptedUser;
   final User? assignedUser;
+  @JsonKey(name: 'orderStatus')
   final OrderStatus status;
   final Artifact artifact;
 

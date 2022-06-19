@@ -3,7 +3,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mpi_front/api/network.dart';
 import 'package:mpi_front/models/artifact.dart';
+import 'package:mpi_front/models/identifier.dart';
 import 'package:mpi_front/pages/components/select_order_template.dart';
 
 final _formKey = GlobalKey<FormBuilderState>();
@@ -14,6 +16,7 @@ class CreateOrder extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final icon = useState<String?>(null);
+    final artId = useState<Identifier?>(null);
 
     return Scaffold(
       appBar: AppBar(title: Text('Создание заказа')),
@@ -29,9 +32,28 @@ class CreateOrder extends HookWidget {
                   children: <Widget>[
                     FormBuilderTextField(
                       name: 'name',
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Название артефакта',
+                        suffix: ElevatedButton(
+                          onPressed: () async {
+                            final template =
+                                await Navigator.of(context).push<Artifact>(
+                              MaterialPageRoute(
+                                builder: (context) => TemplateOrderSelector(),
+                              ),
+                            );
+                            if (template == null) return;
+                            _formKey.currentState!.patchValue({
+                              'name': template.name,
+                              'price': template.price.toString(),
+                            });
+                            icon.value = template.url;
+                            artId.value = template.id;
+                          },
+                          child: const Text('Выбрать шаблон'),
+                        ),
                       ),
+                      readOnly: true,
                       // valueTransformer: (text) => num.tryParse(text),
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -100,23 +122,35 @@ class CreateOrder extends HookWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () async {
-                final template = await Navigator.of(context).push<Artifact>(
-                  MaterialPageRoute(
-                    builder: (context) => TemplateOrderSelector(),
+                _formKey.currentState!.save();
+                print(_formKey.currentState!.value);
+                final price = _formKey.currentState!.value['price']!;
+                final completionDate =
+                    _formKey.currentState!.value['deadline']!;
+                try {
+                  await Network.I.postOrder(
+                      artifactId: artId.value!,
+                      price: double.parse(price),
+                      completionDate: completionDate);
+                } catch (err, sttr) {
+                  print(err);
+                  print(sttr);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Сорян что-то не так, мы все починим'),
+                  ));
+                  return;
+                }
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('Кайф, заказ создан. Пошли в заказы?'),
+                  action: SnackBarAction(
+                    label: 'Пошли',
+                    onPressed: () {
+                      context.go('/');
+                      context.push('/orders');
+                    },
                   ),
-                );
-                if (template == null) return;
-                _formKey.currentState!.patchValue({
-                  'name': template.name,
-                  'price': template.price.toString(),
-                });
-                icon.value = template.url;
+                ));
               },
-              child: const Text('Выбрать шаблон'),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {},
               child: const Text('Опубликовать'),
             ),
           ],
