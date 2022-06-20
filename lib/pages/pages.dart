@@ -5,3 +5,4 @@ export 'auth/register.dart';
 export 'order.dart';
 export 'orders.dart';
 export 'orders_available.dart';
+export 'notifications.dart';

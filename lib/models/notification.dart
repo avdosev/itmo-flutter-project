@@ -4,18 +4,18 @@ import 'package:mpi_front/models/identifier.dart';
 part 'notification.g.dart';
 
 @JsonSerializable()
-class Notification {
+class Notice {
   final bool wasRead;
   final String text;
   final Identifier? orderId;
 
-  Notification({
+  Notice({
     required this.wasRead,
     required this.text,
     required this.orderId,
   });
 
-  static Notification fromJson(Map<String, dynamic> json) =>
+  static Notice fromJson(Map<String, dynamic> json) =>
       _$NotificationFromJson(json);
   Map<String, dynamic> toJson() => _$NotificationToJson(this);
 }

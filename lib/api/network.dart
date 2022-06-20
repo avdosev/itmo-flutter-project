@@ -126,6 +126,12 @@ class Network {
         .list
         .then((e) => e.mapList(User.fromJson));
   }
+
+  Future<List<Notice>> notices() {
+    return get('$api/notification')
+        .list
+        .then((e) => e.mapList(Notice.fromJson));
+  }
 }
 
 extension _Future on Future {

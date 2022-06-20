@@ -39,6 +39,10 @@ final router = GoRouter(
       builder: (context, state) => const OrdersPage(),
     ),
     GoRoute(
+      path: '/notifications',
+      builder: (context, state) => const NotificationsPage(),
+    ),
+    GoRoute(
       path: '/orders/available',
       builder: (context, state) => const OrdersAvailablePage(),
     ),
