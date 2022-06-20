@@ -1,4 +1,4 @@
-make:
+run:
 	flutter run -d macos
 
 codegen:
