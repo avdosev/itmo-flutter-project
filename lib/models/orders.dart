@@ -38,15 +38,18 @@ class OrderInfo {
   final double price;
   final String? completionDate; // null,
   // final Identifier createdUserId; // 1,
-  // final String? acceptedUserId; // null,
-  // final String? assignedUserId; // null,
-  // final String? suggestedUserId; // null,
+  final Identifier? acceptedUserId; // null,
+  final Identifier? assignedUserId; // null,
+  final Identifier? suggestedUserId; // null,
 
   OrderInfo({
     required this.id,
     required this.artifactId,
     required this.price,
     required this.completionDate,
+    this.acceptedUserId,
+    this.assignedUserId,
+    this.suggestedUserId,
   });
 
   static OrderInfo fromJson(Map<String, dynamic> json) =>

@@ -121,6 +121,42 @@ class Network {
     });
   }
 
+  Future<void> createInformation({
+    required String title,
+    required String description,
+    required String information,
+    required double price,
+  }) async {
+    await post('$api/information/', {
+      'title': title,
+      'description': description,
+      'information': information,
+      'price': price,
+    });
+  }
+
+  Future<void> byInformation({
+    required Identifier id,
+  }) async {
+    await post('$api/information/buy/$id');
+  }
+
+  Future<List<Information>> informations() {
+    return get('$api/information')
+        .list
+        .then((e) => e.mapList(Information.fromJson));
+  }
+
+  Future<List<Information>> informationsAvailable() {
+    return get('$api/information/available')
+        .list
+        .then((e) => e.mapList(Information.fromJson));
+  }
+
+  Future<Information> information(Identifier id) {
+    return get('$api/information/$id').map.then(Information.fromJson);
+  }
+
   Future<List<User>> stalkers() {
     return get('$api/users/stalkers')
         .list
@@ -128,7 +164,7 @@ class Network {
   }
 
   Future<List<Notice>> notices() {
-    return get('$api/notification')
+    return get('$api/notifications')
         .list
         .then((e) => e.mapList(Notice.fromJson));
   }

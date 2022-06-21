@@ -6,3 +6,6 @@ export 'order.dart';
 export 'orders.dart';
 export 'orders_available.dart';
 export 'notifications.dart';
+export 'information.dart';
+export 'informations.dart';
+export 'informations_available.dart';

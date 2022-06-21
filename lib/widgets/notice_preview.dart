@@ -20,6 +20,7 @@ class NoticePreview extends StatelessWidget {
       title: Text(notice.text),
       subtitle: Text('Заказ №${notice.orderId}'),
       trailing: action == null ? null : const Icon(Icons.chevron_right),
+      tileColor: notice.wasRead ? null : Colors.blue.withOpacity(0.1),
     );
   }
 }

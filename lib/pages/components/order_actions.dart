@@ -86,7 +86,31 @@ class OrderActions extends StatelessWidget {
             // ),
           ],
         ],
-        if (app.activeUserType.isStalker) ...[],
+        if (app.activeUserType.isStalker) ...[
+          if (order.assignedUser == null &&
+              order.info.suggestedUserId == app.me.id) ...[
+            ElevatedButton(
+              onPressed: () async {
+                await Network.I.acceptOrder(order.id);
+                messenger.showSnackBar(SnackBar(
+                  content: Text('заказ принят'),
+                ));
+                onUpdate();
+              },
+              child: Text('принять'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await Network.I.declineOrder(order.id);
+                messenger.showSnackBar(SnackBar(
+                  content: Text('заказ отклонен'),
+                ));
+                onUpdate();
+              },
+              child: Text('отказать'),
+            ),
+          ]
+        ],
       ].separated(const SizedBox(height: 10)),
     );
   }

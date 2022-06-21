@@ -33,6 +33,15 @@ OrderInfo _$OrderInfoFromJson(Map<String, dynamic> json) => OrderInfo(
       artifactId: Identifier.fromJson(json['artifactId']),
       price: (json['price'] as num).toDouble(),
       completionDate: json['completionDate'] as String?,
+      acceptedUserId: json['acceptedUserId'] == null
+          ? null
+          : Identifier.fromJson(json['acceptedUserId']),
+      assignedUserId: json['assignedUserId'] == null
+          ? null
+          : Identifier.fromJson(json['assignedUserId']),
+      suggestedUserId: json['suggestedUserId'] == null
+          ? null
+          : Identifier.fromJson(json['suggestedUserId']),
     );
 
 Map<String, dynamic> _$OrderInfoToJson(OrderInfo instance) => <String, dynamic>{
@@ -40,6 +49,9 @@ Map<String, dynamic> _$OrderInfoToJson(OrderInfo instance) => <String, dynamic>{
       'artifactId': instance.artifactId,
       'price': instance.price,
       'completionDate': instance.completionDate,
+      'acceptedUserId': instance.acceptedUserId,
+      'assignedUserId': instance.assignedUserId,
+      'suggestedUserId': instance.suggestedUserId,
     };
 
 OrderStatus _$OrderStatusFromJson(Map<String, dynamic> json) => OrderStatus(

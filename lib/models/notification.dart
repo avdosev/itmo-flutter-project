@@ -15,7 +15,6 @@ class Notice {
     required this.orderId,
   });
 
-  static Notice fromJson(Map<String, dynamic> json) =>
-      _$NotificationFromJson(json);
-  Map<String, dynamic> toJson() => _$NotificationToJson(this);
+  static Notice fromJson(Map<String, dynamic> json) => _$NoticeFromJson(json);
+  Map<String, dynamic> toJson() => _$NoticeToJson(this);
 }

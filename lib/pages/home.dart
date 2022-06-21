@@ -11,8 +11,9 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final app = context.watch<AppState>();
+    final userType = app.activeUserType;
     return Scaffold(
-      appBar: AppBar(title: Text("Меню, ${app.activeUserType.runame}")),
+      appBar: AppBar(title: Text("Меню, ${userType.runame}")),
       body: Column(
         children: [
           ListTile(
@@ -23,17 +24,22 @@ class Home extends StatelessWidget {
             title: Text('Заказы'),
             onTap: () => context.push('/orders/'),
           ),
-          if (app.activeUserType.isBaruga || app.activeUserType.isStalker)
+          if (userType.isBaruga || userType.isStalker)
             ListTile(
               title: Text('Заказы, доступные'),
               onTap: () => context.push('/orders/available'),
             ),
-          if (app.activeUserType.isStalker)
+          if (userType.isStalker || userType.isInformer)
             ListTile(
               title: Text('Информация'),
               onTap: () => null,
             ),
-          if (app.activeUserType.isClient)
+          if (userType.isStalker || userType.isInformer)
+            ListTile(
+              title: Text('Информация, доступная'),
+              onTap: () => null,
+            ),
+          if (userType.isClient)
             ListTile(
               title: Text('Создать заказ'),
               onTap: () => context.push('/order/create'),
