@@ -20,10 +20,11 @@ class Home extends StatelessWidget {
             title: Text('Уведомления'),
             onTap: () => context.push('/notifications/'),
           ),
-          ListTile(
-            title: Text('Заказы'),
-            onTap: () => context.push('/orders/'),
-          ),
+          if (!userType.isInformer)
+            ListTile(
+              title: Text('Заказы'),
+              onTap: () => context.push('/orders/'),
+            ),
           if (userType.isBaruga || userType.isStalker)
             ListTile(
               title: Text('Заказы, доступные'),
@@ -32,17 +33,22 @@ class Home extends StatelessWidget {
           if (userType.isStalker || userType.isInformer)
             ListTile(
               title: Text('Информация'),
-              onTap: () => null,
+              onTap: () => context.push('/informations'),
             ),
           if (userType.isStalker || userType.isInformer)
             ListTile(
               title: Text('Информация, доступная'),
-              onTap: () => null,
+              onTap: () => context.push('/informations/available'),
             ),
           if (userType.isClient)
             ListTile(
               title: Text('Создать заказ'),
               onTap: () => context.push('/order/create'),
+            ),
+          if (userType.isInformer)
+            ListTile(
+              title: Text('Создать информацию'),
+              onTap: () => context.push('/information/create'),
             ),
           const Spacer(),
           ListTile(

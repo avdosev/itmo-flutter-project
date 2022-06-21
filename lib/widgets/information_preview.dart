@@ -32,6 +32,7 @@ class InformationPreview extends StatelessWidget {
     if (bynames.isNotEmpty) {
       return bynames;
     }
-    return [information.createdUser.role.runame, information.id].join(' ');
+    return [information.createdUser.role.runame, information.createdUser.id]
+        .join(' ');
   }
 }

@@ -26,7 +26,7 @@ class NotificationsPage extends HookWidget {
       ),
       body: notices.isEmpty
           ? const EmptyState()
-          : ListView.separated(
+          : ListView.builder(
               itemCount: notices.length,
               itemBuilder: (context, index) {
                 final notice = notices[index];
@@ -35,7 +35,6 @@ class NotificationsPage extends HookWidget {
                   action: () => context.push('/order/${notice.orderId}'),
                 );
               },
-              separatorBuilder: (_, __) => const Divider(color: Colors.black),
             ),
     );
   }

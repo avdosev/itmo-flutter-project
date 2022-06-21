@@ -10,7 +10,8 @@ import 'components/information_actions.dart';
 class InformationPage extends HookWidget {
   final Identifier informationId;
 
-  const InformationPage({Key? key, required this.informationId}) : super(key: key);
+  const InformationPage({Key? key, required this.informationId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,9 @@ class InformationPage extends HookWidget {
           ),
           const SizedBox(height: 40),
           InformationActions(
-              information: information, onUpdate: () => version.value += 1),
+            information: information,
+            onUpdate: () => version.value += 1,
+          ),
         ],
       ),
     );

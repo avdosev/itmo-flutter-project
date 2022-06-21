@@ -135,7 +135,7 @@ class Network {
     });
   }
 
-  Future<void> byInformation({
+  Future<void> buyInformation({
     required Identifier id,
   }) async {
     await post('$api/information/buy/$id');
