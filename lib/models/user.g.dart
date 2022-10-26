@@ -9,7 +9,7 @@ part of 'user.dart';
 User _$UserFromJson(Map<String, dynamic> json) => User(
       url: json['url'] as String?,
       id: Identifier.fromJson(json['id']),
-      role: $enumDecode(_$UserTypeEnumMap, json['roleId']),
+      role: $enumDecode(_$UserTypeEnumMap, json['role']),
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
       middleName: json['middleName'] as String?,
@@ -21,13 +21,13 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'middleName': instance.middleName,
-      'roleId': _$UserTypeEnumMap[instance.role],
+      'role': instance.role,
     };
 
 const _$UserTypeEnumMap = {
-  UserType.client: 2,
-  UserType.baruga: 3,
-  UserType.stalker: 1,
-  UserType.informer: 4,
-  UserType.unknown: 5,
+  UserType.client: 'Клиент',
+  UserType.baruga: 'Барыга',
+  UserType.stalker: 'Сталкер',
+  UserType.informer: 'Информатор',
+  UserType.unknown: '',
 };

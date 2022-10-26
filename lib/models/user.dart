@@ -11,7 +11,7 @@ class User {
   final String? firstName;
   final String? lastName;
   final String? middleName;
-  @JsonKey(name: 'roleId')
+  @JsonKey(name: 'role')
   final UserType role;
 
   User({

@@ -24,14 +24,14 @@ Role _$RoleFromJson(Map<String, dynamic> json) => Role(
     );
 
 Map<String, dynamic> _$RoleToJson(Role instance) => <String, dynamic>{
-      'id': _$UserTypeEnumMap[instance.id],
+      'id': instance.id,
       'name': instance.name,
     };
 
 const _$UserTypeEnumMap = {
-  UserType.client: 2,
-  UserType.baruga: 3,
-  UserType.stalker: 1,
-  UserType.informer: 4,
-  UserType.unknown: 5,
+  UserType.client: 'Клиент',
+  UserType.baruga: 'Барыга',
+  UserType.stalker: 'Сталкер',
+  UserType.informer: 'Информатор',
+  UserType.unknown: '',
 };
