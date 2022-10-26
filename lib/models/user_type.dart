@@ -2,16 +2,20 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonEnum()
 enum UserType {
-  @JsonValue(2)
-  client,
-  @JsonValue(3)
-  baruga,
-  @JsonValue(1)
-  stalker,
-  @JsonValue(4)
-  informer,
-  @JsonValue(5)
-  unknown;
+  @JsonValue('Клиент')
+  client('Клиент'),
+  @JsonValue('Барыга')
+  baruga('Барыга'),
+  @JsonValue("Сталкер")
+  stalker('Сталкер'),
+  @JsonValue("Информатор")
+  informer('Информатор'),
+  @JsonValue('')
+  unknown('');
+
+  final String backname;
+
+  const UserType(this.backname);
 
   String get runame {
     switch (this) {
@@ -29,13 +33,7 @@ enum UserType {
     }
   }
 
-  int get id => const {
-        UserType.client: 2,
-        UserType.baruga: 3,
-        UserType.stalker: 1,
-        UserType.informer: 4,
-        UserType.unknown: 5,
-      }[this]!;
+  String toJson() => this.backname;
 
   bool get isBaruga => this == UserType.baruga;
   bool get isUnknown => this == UserType.unknown;

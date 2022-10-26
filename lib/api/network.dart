@@ -59,7 +59,7 @@ class Network {
     return post('$api/auth/register', {
       'email': email,
       'password': password,
-      'roleId': role.id,
+      'role': role.toJson(),
     }).map.then(AuthState.fromJson);
   }
 
