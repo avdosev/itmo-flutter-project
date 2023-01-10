@@ -40,14 +40,14 @@ dependencies:
   go_router: ^3.1.1
   flutter_form_builder: ^7.3.0
   form_builder_validators: ^8.1.1
-  json_annotation: ^4.5.0
+  json_annotation: ^4.7.0
   itertools: ^0.2.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  json_serializable: ^6.2.0
+  json_serializable: ^6.5.4
   build_runner: ^2.1.11
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

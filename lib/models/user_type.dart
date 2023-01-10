@@ -1,16 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 
-@JsonEnum()
+@JsonEnum(valueField: 'backname')
 enum UserType {
-  @JsonValue('Клиент')
-  client('Клиент'),
-  @JsonValue('Барыга')
-  baruga('Барыга'),
-  @JsonValue("Сталкер")
-  stalker('Сталкер'),
-  @JsonValue("Информатор")
-  informer('Информатор'),
-  @JsonValue('')
+  client('Client'),
+  baruga('Huckster'),
+  stalker('Stalker'),
+  informer('Informer'),
+  dealer('WeaponDealer'),
+  courer('Courier'),
   unknown('');
 
   final String backname;
@@ -29,11 +26,11 @@ enum UserType {
         return 'информатор';
       case unknown:
       default:
-        return 'хуйня какая-то';
+        return backname;
     }
   }
 
-  String toJson() => this.backname;
+  String toJson() => backname;
 
   bool get isBaruga => this == UserType.baruga;
   bool get isUnknown => this == UserType.unknown;
