@@ -9,3 +9,4 @@ export 'notifications.dart';
 export 'information.dart';
 export 'informations.dart';
 export 'informations_available.dart';
+export 'profile.dart';

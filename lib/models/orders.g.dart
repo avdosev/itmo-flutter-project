@@ -42,12 +42,14 @@ OrderInfo _$OrderInfoFromJson(Map<String, dynamic> json) => OrderInfo(
       suggestedUserId: json['suggestedUserId'] == null
           ? null
           : Identifier.fromJson(json['suggestedUserId']),
+      deliveryAddress: json['deliveryAddress'] as String,
     );
 
 Map<String, dynamic> _$OrderInfoToJson(OrderInfo instance) => <String, dynamic>{
       'id': instance.id,
       'artifactId': instance.artifactId,
       'price': instance.price,
+      'deliveryAddress': instance.deliveryAddress,
       'completionDate': instance.completionDate,
       'acceptedUserId': instance.acceptedUserId,
       'assignedUserId': instance.assignedUserId,

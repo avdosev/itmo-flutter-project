@@ -11,6 +11,9 @@ class User {
   final String? firstName;
   final String? lastName;
   final String? middleName;
+  final String? nickname;
+  final String? imagePath;
+  final String email;
   @JsonKey(name: 'role')
   final UserType role;
 
@@ -21,6 +24,9 @@ class User {
     required this.firstName,
     required this.lastName,
     required this.middleName,
+    required this.nickname,
+    required this.imagePath,
+    required this.email,
   });
 
   static User fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

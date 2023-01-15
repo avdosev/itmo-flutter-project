@@ -40,6 +40,10 @@ final router = GoRouter(
       builder: (context, state) => const NotificationsPage(),
     ),
     GoRoute(
+      path: '/profile',
+      builder: (context, state) => const ProfilePage(),
+    ),
+    GoRoute(
       path: '/orders',
       builder: (context, state) => const OrdersPage(),
     ),

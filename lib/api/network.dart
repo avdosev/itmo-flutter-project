@@ -51,6 +51,29 @@ class Network {
     return resJson;
   }
 
+  Future<dynamic> put(String url, [Map<String, dynamic>? json]) async {
+    print(AuthService.I.token);
+    final resp = await http.put(
+      Uri.parse(url),
+      headers: {
+        'Content-Type': 'application/json',
+        if (AuthService.I.token != null)
+          'Authorization': 'Bearer ${AuthService.I.token!}',
+      },
+      body: json == null ? null : jsonEncode(json),
+    );
+    final body = Utf8Decoder().convert(resp.bodyBytes);
+    print('--request--');
+    print(url);
+    print(resp.statusCode);
+    print(resp.headers);
+    print(jsonEncode(json));
+    print(body);
+    print('--request--');
+    final resJson = jsonDecode(body);
+    return resJson;
+  }
+
   Future<AuthState> register({
     required String email,
     required String password,
@@ -71,6 +94,28 @@ class Network {
       'email': email,
       'password': password,
     }).map.then(AuthState.fromJson);
+  }
+
+  Future<User> updateProfile({
+    required String? firstName,
+    required String? lastName,
+    required String? middleName,
+    required String? nickname,
+  }) {
+    return put('$api/users/current', {
+      "firstName": firstName,
+      "lastName": lastName,
+      "middleName": middleName,
+      "nickname": nickname,
+    }).map.then((value) => value['user']).map.then(User.fromJson);
+  }
+
+  Future<User> currentUser() {
+    return get('$api/users/current')
+        .map
+        .then((value) => value['user'])
+        .map
+        .then(User.fromJson);
   }
 
   Future<List<Artifact>> templates() {
@@ -95,11 +140,13 @@ class Network {
     required Identifier artifactId,
     required double price,
     required DateTime completionDate,
+    required String location,
   }) {
     return post('$api/orders', {
       'artifactId': artifactId.toJson(),
       'price': price.toString(),
       'completionDate': dateTimeToJson(completionDate),
+      'deliveryAddress': location,
     }).map.then(Order.fromJson);
   }
 

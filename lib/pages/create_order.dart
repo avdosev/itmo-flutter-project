@@ -127,11 +127,14 @@ class CreateOrder extends HookWidget {
                 final price = _formKey.currentState!.value['price']!;
                 final completionDate =
                     _formKey.currentState!.value['deadline']!;
+                final location = _formKey.currentState!.value['location'];
                 try {
                   await Network.I.postOrder(
-                      artifactId: artId.value!,
-                      price: double.parse(price),
-                      completionDate: completionDate);
+                    artifactId: artId.value!,
+                    price: double.parse(price),
+                    completionDate: completionDate,
+                    location: location,
+                  );
                 } catch (err, sttr) {
                   print(err);
                   print(sttr);

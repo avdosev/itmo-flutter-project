@@ -36,6 +36,7 @@ class OrderInfo {
   final Identifier id;
   final Identifier artifactId;
   final double price;
+  final String deliveryAddress;
   final String? completionDate; // null,
   // final Identifier createdUserId; // 1,
   final Identifier? acceptedUserId; // null,
@@ -50,6 +51,7 @@ class OrderInfo {
     this.acceptedUserId,
     this.assignedUserId,
     this.suggestedUserId,
+    required this.deliveryAddress,
   });
 
   static OrderInfo fromJson(Map<String, dynamic> json) =>

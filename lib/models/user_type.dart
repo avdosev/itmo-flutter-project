@@ -24,6 +24,10 @@ enum UserType {
         return 'сталкер';
       case informer:
         return 'информатор';
+      case dealer:
+        return 'диллер';
+      case courer:
+        return 'курьер';
       case unknown:
       default:
         return backname;

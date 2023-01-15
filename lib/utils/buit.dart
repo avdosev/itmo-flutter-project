@@ -1,4 +1,3 @@
-
 extension SeparatedList<T> on List<T> {
   List<T> separated(T separator) {
     final res = <T>[];
@@ -11,4 +10,12 @@ extension SeparatedList<T> on List<T> {
     }
     return res;
   }
+}
+
+extension ToString on Object? {
+  String get str => this == null ? 'Не указано' : toString();
+}
+
+extension StringX on String {
+  String? get nullIfEmpty => isEmpty ? null : this;
 }

@@ -17,6 +17,10 @@ class Home extends StatelessWidget {
       body: Column(
         children: [
           ListTile(
+            title: Text('Профиль'),
+            onTap: () => context.push('/profile/'),
+          ),
+          ListTile(
             title: Text('Уведомления'),
             onTap: () => context.push('/notifications/'),
           ),
