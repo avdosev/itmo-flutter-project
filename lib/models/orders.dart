@@ -11,7 +11,9 @@ class Order {
   final OrderInfo info;
   final User createdUser;
   final User? acceptedUser;
+  final User? suggestedUser;
   final User? assignedUser;
+  final User? acceptedCourier;
   @JsonKey(name: 'orderStatus')
   final OrderStatus status;
   final Artifact artifact;
@@ -21,6 +23,8 @@ class Order {
     required this.acceptedUser,
     required this.assignedUser,
     required this.createdUser,
+    required this.suggestedUser,
+    required this.acceptedCourier,
     required this.info,
     required this.status,
   });

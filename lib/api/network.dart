@@ -184,6 +184,15 @@ class Network {
     await post('$api/orders/decline/$id');
   }
 
+  Future<void> startOrder(Identifier id) async {
+    await post('$api/orders/start/$id');
+  }
+
+  Future<void> completeOrder(Identifier id) async {
+    await post('$api/orders/complete/$id');
+  }
+
+  /// Предложить заказ сталкеру/курьеру
   Future<void> suggestOrder({
     required Identifier stalkerId,
     required Identifier orderId,
@@ -236,11 +245,19 @@ class Network {
         .then((e) => e.mapList(User.fromJson));
   }
 
+  Future<List<User>> couriers() {
+    return get('$api/users/couriers')
+        .list
+        .then((e) => e.mapList(User.fromJson));
+  }
+
   Future<List<Notice>> notices() {
     return get('$api/notifications')
         .list
         .then((e) => e.mapList(Notice.fromJson));
   }
+
+  
 }
 
 extension _Future on Future {
