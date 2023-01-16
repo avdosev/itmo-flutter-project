@@ -1,14 +1,19 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:itertools/itertools.dart';
 import 'package:mpi_front/api/auth_service.dart';
 import 'package:mpi_front/models/models.dart';
 import 'package:http/http.dart' as http;
+// ignore: depend_on_referenced_packages
+import 'package:http_parser/http_parser.dart';
+import 'package:mpi_front/utils/buit.dart';
 
 class Network {
   static Network get I => Network();
 
-  final api = 'http://127.0.0.1:8080/api';
+  final host = 'http://127.0.0.1:8080';
+  String get api => '$host/api';
 
   Future<dynamic> get(String url) async {
     print(AuthService.I.token);
@@ -116,6 +121,27 @@ class Network {
         .then((value) => value['user'])
         .map
         .then(User.fromJson);
+  }
+
+  Future<void> uploadAvatar(Uint8List image, String filename) async {
+    print(image.length);
+    final uri = Uri.parse('$api/users/image/upload');
+    final request = http.MultipartRequest('POST', uri);
+    final httpImage = http.MultipartFile.fromBytes(
+      'image',
+      image,
+      filename: filename,
+      contentType: MediaType.parse('image/png'),
+    );
+    request.files.add(httpImage);
+    request.headers
+      ..addAll({
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer ${AuthService.I.token!}',
+      });
+    final response = await request.send();
+    print('upload avatar');
+    print(await response.stream.bytesToString());
   }
 
   Future<List<Artifact>> templates() {
@@ -226,4 +252,9 @@ extension _Future on Future {
 
 String dateTimeToJson(DateTime dt) {
   return '${dt.year}-${dt.month.toString().padLeft(2, '0')}-${dt.day.toString().padLeft(2, '0')}';
+}
+
+extension UserX on User {
+  String? get avatarUrl =>
+      imagePath?.pipe((path) => '${Network.I.host}/images/users/$path');
 }

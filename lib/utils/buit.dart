@@ -19,3 +19,7 @@ extension ToString on Object? {
 extension StringX on String {
   String? get nullIfEmpty => isEmpty ? null : this;
 }
+
+extension PipeX<T> on T {
+  R pipe<R>(R Function(T) func) => func(this);
+}

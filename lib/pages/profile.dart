@@ -6,6 +6,7 @@ import 'package:mpi_front/api/auth_service.dart';
 import 'package:mpi_front/api/network.dart';
 import 'package:mpi_front/stores/app_state.dart';
 import 'package:mpi_front/widgets/artifact_preview.dart';
+import 'package:mpi_front/widgets/avatar.dart';
 import 'package:mpi_front/widgets/empty_state.dart';
 import 'package:mpi_front/widgets/loader.dart';
 import 'package:mpi_front/utils/buit.dart';
@@ -33,8 +34,23 @@ class ProfilePage extends HookWidget {
       ),
       body: Column(
         children: [
-          Text(me.role.runame),
-          Text(me.email),
+            const SizedBox(height: 20),
+          Row(children: [
+            Avatar(url: me.avatarUrl, size: 32),
+            const SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(me.role.runame),
+                const Divider(
+                  height: 10,
+                  thickness: 1,
+                  color: Colors.black,
+                ),
+                Text(me.email),
+              ],
+            ).padding(vertical: 10).expanded()
+          ]),
           TextField(
             controller: nickname,
             decoration: InputDecoration(hintText: 'nickname'),
@@ -80,6 +96,14 @@ class ProfilePage extends HookWidget {
                 );
                 final XFile? file =
                     await openFile(acceptedTypeGroups: <XTypeGroup>[typeGroup]);
+                if (file == null) {
+                  return;
+                }
+
+                final filedata = await file.readAsBytes();
+
+                await Network.I.uploadAvatar(filedata, file.name);
+
                 app.refreshMe();
               }),
         ],
