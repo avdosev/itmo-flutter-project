@@ -29,7 +29,7 @@ class Home extends StatelessWidget {
               title: Text('Заказы'),
               onTap: () => context.push('/orders/'),
             ),
-          if (userType.isBaruga || userType.isStalker)
+          if (userType.isBaruga || userType.isStalker || userType.isCourier)
             ListTile(
               title: Text('Заказы, доступные'),
               onTap: () => context.push('/orders/available'),

@@ -30,7 +30,7 @@ class OrderPage extends HookWidget {
             Text('Артефакт: ${order.artifact.name}'),
             Text('Сталкер: ${order.assignedUser == null ? 'не' : ''} назначен'),
             Text('Барыга: ${order.acceptedUser == null ? 'не' : ''} назначен'),
-            // Text('Куда: ${order.order.price}'),
+            Text('Куда: ${order.info.deliveryAddress}'),
             Text('Выполнить до: ${order.info.completionDate}'),
             Text('Статус: ${order.status.name}'),
           ].separated(

@@ -7,25 +7,45 @@ part 'information.g.dart';
 
 @JsonSerializable()
 class Information {
+  Identifier get id => info.id;
+  String get title => info.title;
+  String get description => info.description;
+  String? get information => info.information;
+  double get price => info.price;
+  final User createdUser;
+  final User? acceptedUser;
+
+  @JsonKey(name: 'information')
+  final InformationInfo info;
+
+  Information({
+    required this.acceptedUser,
+    required this.createdUser,
+    required this.info
+  });
+
+  static Information fromJson(Map<String, dynamic> json) =>
+      _$InformationFromJson(json);
+  Map<String, dynamic> toJson() => _$InformationToJson(this);
+}
+
+@JsonSerializable()
+class InformationInfo {
   final Identifier id;
   final String title;
   final String description;
   final String? information;
-  final User createdUser;
-  final User? acceptedUser;
   final double price;
 
-  Information({
+  InformationInfo({
     required this.id,
-    required this.acceptedUser,
-    required this.createdUser,
     required this.title,
     required this.description,
     required this.information,
     required this.price,
   });
 
-  static Information fromJson(Map<String, dynamic> json) =>
-      _$InformationFromJson(json);
-  Map<String, dynamic> toJson() => _$InformationToJson(this);
+  static InformationInfo fromJson(Map<String, dynamic> json) =>
+      _$InformationInfoFromJson(json);
+  Map<String, dynamic> toJson() => _$InformationInfoToJson(this);
 }

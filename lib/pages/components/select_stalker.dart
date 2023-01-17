@@ -19,7 +19,35 @@ class StalkerSelector extends HookWidget {
     }
     final templates = snapshot.data!;
     return Scaffold(
-      appBar: AppBar(title: Text('Артефакты, шаблоны')),
+      appBar: AppBar(title: Text('Сталкеры')),
+      body: ListView(
+        children: templates
+            .map(
+              (e) => UserPreview(
+                user: e,
+                action: () => Navigator.of(context).pop(e),
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+}
+
+
+class CourierSelector extends HookWidget {
+  const CourierSelector({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final asyncArtifacts = useMemoized(() => Network.I.couriers());
+    final snapshot = useFuture(asyncArtifacts);
+    if (!snapshot.hasData) {
+      return const Loader();
+    }
+    final templates = snapshot.data!;
+    return Scaffold(
+      appBar: AppBar(title: Text('Курьеры')),
       body: ListView(
         children: templates
             .map(

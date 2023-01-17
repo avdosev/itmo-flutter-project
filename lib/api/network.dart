@@ -184,21 +184,21 @@ class Network {
     await post('$api/orders/decline/$id');
   }
 
-  Future<void> startOrder(Identifier id) async {
-    await post('$api/orders/start/$id');
-  }
-
   Future<void> completeOrder(Identifier id) async {
     await post('$api/orders/complete/$id');
   }
 
+  Future<void> deliverOrder(Identifier id) async {
+    await post('$api/orders/deliver/$id');
+  }
+
   /// Предложить заказ сталкеру/курьеру
   Future<void> suggestOrder({
-    required Identifier stalkerId,
+    required Identifier userId,
     required Identifier orderId,
   }) async {
     await post('$api/orders/suggest/', {
-      'stalkerId': stalkerId.toJson(),
+      'userId': userId.toJson(),
       'orderId': orderId.toJson(),
     });
   }
@@ -256,8 +256,6 @@ class Network {
         .list
         .then((e) => e.mapList(Notice.fromJson));
   }
-
-  
 }
 
 extension _Future on Future {

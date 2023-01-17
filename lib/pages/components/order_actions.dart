@@ -51,7 +51,6 @@ class OrderActions extends StatelessWidget {
             if (order.assignedUser == null)
               ElevatedButton(
                 onPressed: () async {
-                  // TODO: выбор сталкера
                   final stalker = await Navigator.of(context).push<User>(
                     MaterialPageRoute(
                       builder: (context) => StalkerSelector(),
@@ -64,7 +63,7 @@ class OrderActions extends StatelessWidget {
                     return;
                   }
                   Network.I.suggestOrder(
-                    stalkerId: stalker.id,
+                    userId: stalker.id,
                     orderId: order.id,
                   );
                   messenger.showSnackBar(SnackBar(
@@ -74,6 +73,32 @@ class OrderActions extends StatelessWidget {
                 },
                 child: Text('Назначить сталкера'),
               ),
+            if (order.status.atTheHunter)
+              ElevatedButton(
+                onPressed: () async {
+                  final stalker = await Navigator.of(context).push<User>(
+                    MaterialPageRoute(
+                      builder: (context) => CourierSelector(),
+                    ),
+                  );
+                  if (stalker == null) {
+                    messenger.showSnackBar(SnackBar(
+                      content: Text('курьер не выбран'),
+                    ));
+                    return;
+                  }
+                  Network.I.suggestOrder(
+                    userId: stalker.id,
+                    orderId: order.id,
+                  );
+                  messenger.showSnackBar(SnackBar(
+                    content: Text('курьеру отправлено приглашение'),
+                  ));
+                  onUpdate();
+                },
+                child: Text('Назначить курьера'),
+              ),
+
             // ElevatedButton(
             //   onPressed: () async {
             //     await Network.I.declineOrder(order.id);
@@ -86,9 +111,8 @@ class OrderActions extends StatelessWidget {
             // ),
           ],
         ],
-        if (app.activeUserType.isStalker) ...[
-          if (order.assignedUser == null &&
-              order.info.suggestedUserId == app.me.id) ...[
+        if (app.activeUserType.isStalker || app.activeUserType.isCourier) ...[
+          if (order.info.suggestedUserId == app.me.id) ...[
             ElevatedButton(
               onPressed: () async {
                 await Network.I.acceptOrder(order.id);
@@ -108,6 +132,31 @@ class OrderActions extends StatelessWidget {
                 onUpdate();
               },
               child: Text('отказать'),
+            ),
+          ],
+          if (order.assignedUser?.id == app.me.id &&
+              order.status.atTheStalker) ...[
+            ElevatedButton(
+              onPressed: () async {
+                await Network.I.completeOrder(order.id);
+                messenger.showSnackBar(SnackBar(
+                  content: Text('заказ передан барыге'),
+                ));
+                onUpdate();
+              },
+              child: Text('передать барыге'),
+            ),
+          ],
+          if (order.acceptedCourier?.id == app.me.id && order.status.atTheCourier) ...[
+            ElevatedButton(
+              onPressed: () async {
+                await Network.I.deliverOrder(order.id);
+                messenger.showSnackBar(SnackBar(
+                  content: Text('заказ доставлен'),
+                ));
+                onUpdate();
+              },
+              child: Text('доставить'),
             ),
           ]
         ],

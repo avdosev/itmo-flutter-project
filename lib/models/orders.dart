@@ -73,6 +73,10 @@ class OrderStatus {
     required this.name,
   });
 
+  bool get atTheHunter => id.value == '5';
+  bool get atTheStalker => id.value == '4';
+  bool get atTheCourier => id.value == '6';
+
   static OrderStatus fromJson(Map<String, dynamic> json) =>
       _$OrderStatusFromJson(json);
   Map<String, dynamic> toJson() => _$OrderStatusToJson(this);
