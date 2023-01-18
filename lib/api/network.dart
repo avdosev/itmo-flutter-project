@@ -123,6 +123,11 @@ class Network {
         .map
         .then(User.fromJson);
   }
+  
+  Future<bool> hasNotifications() {
+    return get('$api/notifications/new')
+        .then((value) => value['hasNotifications'] as bool);
+  }
 
   Future<void> uploadAvatar(Uint8List image, String filename) async {
     print(image.length);

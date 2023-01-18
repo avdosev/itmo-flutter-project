@@ -12,6 +12,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final app = context.watch<AppState>();
     final userType = app.activeUserType;
+    final size = 10.0;
     return Scaffold(
       appBar: AppBar(title: Text("Меню, ${userType.runame}")),
       body: Column(
@@ -23,6 +24,16 @@ class Home extends StatelessWidget {
           ListTile(
             title: Text('Уведомления'),
             onTap: () => context.push('/notifications/'),
+            trailing: app.hasNotifications
+                ? Container(
+                    width: size,
+                    height: size,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.red,
+                    ),
+                  )
+                : null,
           ),
           ListTile(
             title: Text('Артефакты'),

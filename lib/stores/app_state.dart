@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:mpi_front/api/auth_service.dart';
 import 'package:mpi_front/api/network.dart';
@@ -9,12 +11,20 @@ class AppState extends ChangeNotifier {
   User get me => _me!;
 
   User? _me;
+  bool hasNotifications = true;
 
-  AppState();
+  late Timer _timer;
+
+  AppState() {
+    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+      checkNotices();
+    });
+  }
 
   void auth(AuthState auth) {
     AuthService.I.authorize(auth.token);
     _me = auth.user;
+    checkNotices();
   }
 
   void refreshMe() async {
@@ -22,7 +32,15 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> checkNotices() async {
+    if (_me == null) return;
+    final prev = hasNotifications;
+    hasNotifications = await Network.I.hasNotifications();
+    if (prev != hasNotifications) notifyListeners();
+  }
+
   void logout() {
     AuthService.I.logout();
+    hasNotifications = false;
   }
 }
