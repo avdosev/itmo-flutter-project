@@ -21,7 +21,7 @@ WeaponOrder _$WeaponOrderFromJson(Map<String, dynamic> json) => WeaponOrder(
       acceptedCourier: json['acceptedCourier'] == null
           ? null
           : User.fromJson(json['acceptedCourier'] as Map<String, dynamic>),
-      status: OrderStatus.fromJson(json['orderStatus'] as Map<String, dynamic>),
+      status: OrderStatus.fromJson(json['status'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$WeaponOrderToJson(WeaponOrder instance) =>

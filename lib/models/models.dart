@@ -6,3 +6,4 @@ export 'identifier.dart';
 export 'auth_state.dart';
 export 'notification.dart';
 export 'information.dart';
+export 'weapon.dart';

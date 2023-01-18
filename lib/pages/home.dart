@@ -44,6 +44,16 @@ class Home extends StatelessWidget {
               title: Text('Информация, доступная'),
               onTap: () => context.push('/informations/available'),
             ),
+          if (userType.isStalker || userType.isDealer || userType.isCourier)
+            ListTile(
+              title: Text('Оружие'),
+              onTap: () => context.push('/weapon'),
+            ),
+          if (userType.isStalker || userType.isDealer || userType.isCourier)
+            ListTile(
+              title: Text('Оружие, доступное'),
+              onTap: () => context.push('/weapon/available'),
+            ),
           if (userType.isClient)
             ListTile(
               title: Text('Создать заказ'),
@@ -53,6 +63,11 @@ class Home extends StatelessWidget {
             ListTile(
               title: Text('Создать информацию'),
               onTap: () => context.push('/information/create'),
+            ),
+          if (userType.isDealer)
+            ListTile(
+              title: Text('Создать оружие'),
+              onTap: () => context.push('/weapon/create'),
             ),
           const Spacer(),
           ListTile(

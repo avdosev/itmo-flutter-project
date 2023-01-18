@@ -15,7 +15,6 @@ class WeaponOrder {
   final User? acquiredUser;
   final User? suggestedCourier;
   final User? acceptedCourier;
-  @JsonKey(name: 'orderStatus')
   final OrderStatus status;
 
   WeaponOrder({

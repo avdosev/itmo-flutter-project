@@ -76,6 +76,7 @@ class OrderStatus {
   bool get atTheHunter => id.value == '5';
   bool get atTheStalker => id.value == '4';
   bool get atTheCourier => id.value == '6';
+  bool get weaponBuiedStalker => id.value == '10';
 
   static OrderStatus fromJson(Map<String, dynamic> json) =>
       _$OrderStatusFromJson(json);

@@ -13,6 +13,7 @@ class Network {
   static Network get I => Network();
 
   final host = 'http://127.0.0.1:8080';
+  // final host = 'http://193.168.46.222:9000';
   String get api => '$host/api';
 
   Future<dynamic> get(String url) async {
@@ -255,6 +256,76 @@ class Network {
     return get('$api/notifications')
         .list
         .then((e) => e.mapList(Notice.fromJson));
+  }
+
+  Future<void> createWeapon({
+    required String title,
+    required String description,
+    required double price,
+  }) async {
+    await post('$api/weapon/', {
+      'title': title,
+      'description': description,
+      'price': price,
+    });
+  }
+
+  Future<void> buyWeapon({
+    required Identifier id,
+    required String delivery,
+  }) async {
+    await post('$api/weapon/buy/$id', {
+      'deliveryAddress': delivery,
+    });
+  }
+
+  Future<void> suggestWeapon({
+    required Identifier id,
+    required Identifier userId,
+  }) async {
+    await post('$api/weapon/suggest', {
+      'weaponId': id,
+      'userId': userId,
+    });
+  }
+
+  Future<void> deliverWeapon({
+    required Identifier id,
+  }) async {
+    await post('$api/weapon/courier/deliver/${id}');
+  }
+
+  Future<void> declineWeapon({
+    required Identifier id,
+  }) async {
+    await post('$api/weapon/courier/decline/${id}');
+  }
+
+  Future<void> acceptWeapon({
+    required Identifier id,
+  }) async {
+    await post('$api/weapon/courier/accept/${id}');
+  }
+
+  Future<List<WeaponOrder>> weapons() {
+    return get('$api/weapon')
+        .list
+        .then((e) => e.mapList(WeaponOrder.fromJson))
+        .onError((error, stackTrace) {
+      print(error);
+      print(stackTrace);
+      return [];
+    });
+  }
+
+  Future<List<WeaponOrder>> weaponAvailable() {
+    return get('$api/weapon/available')
+        .list
+        .then((e) => e.mapList(WeaponOrder.fromJson));
+  }
+
+  Future<WeaponOrder> weapon(Identifier id) {
+    return get('$api/weapon/$id').map.then(WeaponOrder.fromJson);
   }
 }
 

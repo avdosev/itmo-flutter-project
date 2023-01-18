@@ -36,3 +36,37 @@ class InformationPreview extends StatelessWidget {
         .join(' ');
   }
 }
+
+class WeaponPreview extends StatelessWidget {
+  final WeaponOrder weapon;
+  final VoidCallback? action;
+
+  const WeaponPreview({
+    super.key,
+    required this.weapon,
+    this.action,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: action,
+      title: Text(weapon.weapon.title),
+      subtitle: Text('Оружие от $_author'),
+      trailing: (action == null ? null : const Icon(Icons.chevron_right)),
+    );
+  }
+
+  String get _author {
+    final bynames = [
+      weapon.createdUser.firstName,
+      weapon.createdUser.middleName,
+      weapon.createdUser.lastName
+    ].notNull.join(' ');
+    if (bynames.isNotEmpty) {
+      return bynames;
+    }
+    return [weapon.createdUser.role.runame, weapon.createdUser.id]
+        .join(' ');
+  }
+}

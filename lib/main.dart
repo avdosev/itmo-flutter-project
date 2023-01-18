@@ -75,6 +75,24 @@ final router = GoRouter(
         informationId: Identifier.fromString(state.params['id']!),
       ),
     ),
+    GoRoute(
+      path: '/weapon',
+      builder: (context, state) => const WeaponsPage(),
+    ),
+    GoRoute(
+      path: '/weapon/available',
+      builder: (context, state) => const WeaponsAvailablePage(),
+    ),
+    GoRoute(
+      path: '/weapon/create',
+      builder: (context, state) => CreateWeapon(),
+    ),
+    GoRoute(
+      path: '/weapon/:id',
+      builder: (context, state) => WeaponPage(
+        weaponId: Identifier.fromString(state.params['id']!),
+      ),
+    ),
   ],
   // TODO: вернуть
   redirect: (state) {
