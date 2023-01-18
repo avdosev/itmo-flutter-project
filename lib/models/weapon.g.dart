@@ -32,7 +32,7 @@ Map<String, dynamic> _$WeaponOrderToJson(WeaponOrder instance) =>
       'acquiredUser': instance.acquiredUser,
       'suggestedCourier': instance.suggestedCourier,
       'acceptedCourier': instance.acceptedCourier,
-      'orderStatus': instance.status,
+      'status': instance.status,
     };
 
 Weapon _$WeaponFromJson(Map<String, dynamic> json) => Weapon(

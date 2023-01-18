@@ -11,6 +11,7 @@ Artifact _$ArtifactFromJson(Map<String, dynamic> json) => Artifact(
       name: json['name'] as String,
       id: Identifier.fromJson(json['id']),
       price: (json['price'] as num?)?.toDouble(),
+      averageDays: (json['averageDays'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$ArtifactToJson(Artifact instance) => <String, dynamic>{
@@ -18,4 +19,5 @@ Map<String, dynamic> _$ArtifactToJson(Artifact instance) => <String, dynamic>{
       'url': instance.url,
       'name': instance.name,
       'price': instance.price,
+      'averageDays': instance.averageDays,
     };

@@ -93,6 +93,10 @@ final router = GoRouter(
         weaponId: Identifier.fromString(state.params['id']!),
       ),
     ),
+    GoRoute(
+      path: '/artifacts',
+      builder: (context, state) => const ArtifactsPage(),
+    ),
   ],
   // TODO: вернуть
   redirect: (state) {

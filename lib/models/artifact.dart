@@ -9,12 +9,14 @@ class Artifact {
   final String? url;
   final String name;
   final double? price;
+  final double? averageDays;
 
   Artifact({
     this.url,
     required this.name,
     required this.id,
     this.price,
+    this.averageDays,
   });
 
   static Artifact fromJson(Map<String, dynamic> json) =>
