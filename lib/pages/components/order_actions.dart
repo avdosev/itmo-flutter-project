@@ -73,7 +73,7 @@ class OrderActions extends StatelessWidget {
                 },
                 child: Text('Назначить сталкера'),
               ),
-            if (order.status.atTheHunter)
+            if (order.status.atTheHunter || order.assignedUser == null)
               ElevatedButton(
                 onPressed: () async {
                   final stalker = await Navigator.of(context).push<User>(
